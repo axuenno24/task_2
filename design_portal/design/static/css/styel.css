@@ -58,7 +58,7 @@ p:has(#id_consent) {
 
 label[for="id_consent"] {
     margin-bottom: 0;
-    margin-right: 5px;
+    margin-right: 50px;
 }
 
 .btn-purple {

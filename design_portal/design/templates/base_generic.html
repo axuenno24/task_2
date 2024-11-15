@@ -16,7 +16,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}">Design.Pro</a>
+                <a class="navbar-brand" href="{% url 'index' %}">Design</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -27,20 +27,14 @@
                                 <span class="nav-link disabled">Аккаунт: {{ user.get_username }}</span>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}">Профиль</a>
+                                <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'login' %}">Регистрация</a>
+                                <a class="nav-link" href="{% url 'login' %}">Войти</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'register' %}">Главная</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'register' %}">Войти</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'register' %}">Выйти</a>
+                                <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
                             </li>
                         {% endif %}
                     </ul>

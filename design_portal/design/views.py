@@ -2,9 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views import generic, View
-
-from .forms import LoginForm, CustomUserCreationForm
 from django.urls import reverse_lazy
+from .forms import LoginForm, CustomUserCreationForm
 
 # Главная страница
 def index(request):
@@ -12,33 +11,51 @@ def index(request):
 
 # Регистрация
 class Registration(generic.CreateView):
-    templates_name = 'registration/register.html'
+    template_name = 'registration/register.html'  # Исправлено: template_name вместо templates_name
     form_class = CustomUserCreationForm
-    transition_url = reverse_lazy("register")
+    success_url = reverse_lazy('login')  # Переход после успешной регистрации, например, на страницу входа
 
 # Вход
 class Login(View):
     template_name = 'registration/login.html'
     form_class = LoginForm
 
+    def get(self, request):
+        form = LoginForm()
+        next_page = request.GET.get('next', '')  # Получаем next из GET параметров
+        return render(request, self.template_name, {'form': form, 'next': next_page})
+
     def post(self, request):
-        form = self.form_class(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('profile')
-        form = self.form_class()  # Пустая форма для GET-запроса
-        return render(request, self.template_name, {'form': form})
+                next_page = request.POST.get('next') or reverse_lazy('catalog:home')  # Получаем next из POST данных
+                return redirect(next_page)
+            else:
+                form.add_error(None, 'Неверные учетные данные.')
 
+        return render(request, self.template_name, {'form': form})
 
 # Выход
 def logout_view(request):
     logout(request)  # Выход пользователя
-    return redirect('index')
+    return render(request, 'registration/logout.html')
 
 # Профиль
 def profile(request):
-    return render(request, 'registration/profile.html')
+    # Получаем текущего пользователя
+    user = request.user
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse_lazy('catalog:profile'))  # Перенаправление на профиль после успешного сохранения
+    else:
+        form = CustomUserCreationForm(instance=user)  # Инициализация формы с данными пользователя
+
+    return render(request, 'catalog/profile.html', {'form': form})
