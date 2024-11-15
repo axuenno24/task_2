@@ -54,7 +54,7 @@ def profile(request):
         form = CustomUserCreationForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect(reverse_lazy('catalog:profile'))  # Перенаправление на профиль после успешного сохранения
+            return redirect(reverse_lazy('registration:profile'))  # Перенаправление на профиль после успешного сохранения
     else:
         form = CustomUserCreationForm(instance=user)  # Инициализация формы с данными пользователя
 

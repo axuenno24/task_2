@@ -2,6 +2,7 @@ from bs4.diagnose import profile
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('', views.index, name='index'),  # Главная страница
     path('register/', views.Registration.as_view(), name='register'),  # Регистрация

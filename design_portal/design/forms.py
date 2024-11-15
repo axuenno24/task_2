@@ -29,13 +29,16 @@ class CustomUserCreationForm(forms.ModelForm):
             user.save()
         return user
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'placeholder': 'Введите имя пользователя'}))
     password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль'}))
 
 
 class Registration(CreateView):
-    model = CustomUser  # Укажите модель
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')  # URL для перенаправления после успешной регистрации
-    fields = ['username', 'password', 'email']  # Поля формы
+     model = CustomUser  # Укажите модель
+     template_name = 'registration/register.html'
+     success_url = reverse_lazy('login')  # URL для перенаправления после успешной регистрации
+     fields = ['username', 'password', 'email']  # Поля формы
+
+

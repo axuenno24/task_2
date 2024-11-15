@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.forms import UserCreationForm
+
 
 
 class CustomUser(AbstractUser):
@@ -10,6 +10,17 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=100, verbose_name='Email', unique=True)
     password = models.CharField(max_length=100, verbose_name='Пароль')
     password_confirm = models.CharField(max_length=100, verbose_name='Подтверждение пароля' )
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',  # Уникальное имя для этой связи
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_set',  # Уникальное имя для этой связи
+        blank=True,
+    )
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
