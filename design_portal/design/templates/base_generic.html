@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        {% load bootstrap4 %}
+        {% bootstrap_css %}
+        {% load widget_tweaks %}
+
+        {% block title %}<title>Design</title>{% endblock %}
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index' %}">Design.Pro</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class="nav-link disabled">Аккаунт: {{ user.get_username }}</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Профиль</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Регистрация</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Войти</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Выйти</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid mt-3">
+            <!-- Separator between menu and main content -->
+            <div class="content-separator"></div>
+
+            <div class="row">
+                <main role="main" class="col-sm-12 pt-3 px-4">
+                    {% block content %}
+                    <!-- Main content goes here -->
+                    {% endblock %}
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
