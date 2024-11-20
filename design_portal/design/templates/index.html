@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
+{% load order_tags %}
+
 {% block content %}
 
 <h1>Design Pro</h1>
 <p>Дизайн интерьеров</p>
+    {% show_all_tags %}
 
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Ваши заказы</h2>
+  <ul>
+    {% for order in orders %}
+      <li>
+        {{ order.name }} - 
+        <a href="{% url 'order_delete' order.pk %}">Удалить</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
