@@ -56,10 +56,16 @@ p:has(#id_consent) {
     align-items: center;
 }
 
-label[for="id_consent"] {
-    margin-bottom: 0;
-    margin-right: 50px;
+#id_consent {
+    width: auto; /* Уберите фиксированную ширину */
+    height: auto; /* Уберите фиксированную высоту */
+    margin-right: 5px; /* Добавьте отступ справа, если нужно */
 }
+
+label[for="id_consent"] {
+    margin: 0; /* Уберите лишние отступы */
+}
+
 
 .btn-purple {
     background-color: #4b0082; /* Dark purple button */

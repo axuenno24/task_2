@@ -17,7 +17,10 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'consent_data']
+        widgets = {
+            'consent_data': forms.CheckboxInput(attrs={'id': 'id_consent'})
+        }
 
 
 class LoginForm(AuthenticationForm):
