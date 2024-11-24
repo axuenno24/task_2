@@ -1,82 +1,177 @@
+/* Основной стиль */
+body {
+  margin: 0;                /* Убираем отступы */
+  height: 100vh;            /* Высота экрана */
+}
+
 .navbar {
-    background-color: rgba(34, 0, 255, 0.13);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: gray;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.navbar .nav-link {
-    color: #4b0082;
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
 }
 
-.navbar .nav-link:hover {
-    color: #ffcc00;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar-brand {
-    font-size: 22pt;
+.nav-links li {
+  display: inline;
 }
 
-.navbar-brand:hover {
-    color: #4b0082;
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  transition: color 0.3s;
 }
 
-.content-separator {
-    background-color: #4b0082;
-    height: 3px;
-    margin: 20px;
+.nav-links a:hover {
+  color: #007BFF; /* Синий оттенок при наведении */
 }
 
-.form-group {
-    margin-bottom: 15px; /* Space between fields */
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
-form label{
-    color: rgba(75, 0, 130, 0.61);
+.content {
+  display: flex;
+  justify-content: center;  /* Центрирует по горизонтали */
+  align-items: center;      /* Центрирует по вертикали */
+  height: calc(100vh - 50px); /* Высота контента (вычитаем высоту navbar) */
 }
 
-form input {
-    border: 2px solid #4b0082; /* Dark purple border */
-    padding: 10px; /* Padding inside input fields */
-    border-radius: 5px; /* Rounded corners */
-    margin-right: 50%;
-    width: 60%; /* Full width */
-    box-sizing: border-box; /* Include padding in width calculation */
+.form-container {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    width: 300px;
+    text-align: center;
 }
 
-form input:hover {
-    transition: 0.3s;
-    background-color: rgba(34, 0, 255, 0.13);
+.form-container h1 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-#id_consent{
-    width: 25px;
-    height: 25px;
+.form-container input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
-p:has(#id_consent) {
+.form-container input:focus {
+    border-color: #ff5722;
+    outline: none;
+}
+
+.form-container button {
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #e64a19;
+}
+
+textarea {
+    resize: none; /* Запрещает изменение размера */
+    width: 100%;
+    height: 100%;
+}
+
+/* Контейнер для заказов */
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрирует по горизонтали */
+  justify-content: flex-start; /* Располагает элементы сверху */
+  text-align: center; /* Выравнивание текста */
+  padding: 20px;
+}
+
+.order-item {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+  width: 80%; /* Можно регулировать ширину */
+  max-width: 600px; /* Ограничение ширины */
+}
+
+.order-item img {
+  max-width: 200px;
+  margin-bottom: 10px;
+}
+
+
+/* Контейнер для профиля */
+.profile-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Можно регулировать ширину */
+    max-width: 600px; /* Ограничение ширины */
+    margin: 0 auto; /* Центрирование */
 }
 
-#id_consent {
-    width: auto; /* Уберите фиксированную ширину */
-    height: auto; /* Уберите фиксированную высоту */
-    margin-right: 5px; /* Добавьте отступ справа, если нужно */
+.profile-container h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-label[for="id_consent"] {
-    margin: 0; /* Уберите лишние отступы */
+.profile-info p {
+    font-size: 1.1em;
+    color: #555;
+    margin: 10px 0;
 }
 
-
-.btn-purple {
-    background-color: #4b0082; /* Dark purple button */
-    color: white; /* White text color */
-    padding: 10px 20px; /* Padding for button */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners for button */
-    cursor: pointer; /* Pointer cursor on hover */
+.logout-link {
+    font-size: 1.1em;
+    color: #ff5722;
+    text-decoration: none;
+    margin-top: 20px;
 }
 
-.btn-purple:hover {
-    transition: 0.3s;
-    background-color: #6a0dad;
+.logout-link:hover {
+    color: #e64a19;
 }
+

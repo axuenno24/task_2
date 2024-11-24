@@ -22,7 +22,7 @@ class OrderListView(LoginRequiredMixin, ListView):
 class OrderCreateView(LoginRequiredMixin, CreateView):
     template_name = 'orders/create_order.html'
     form_class = CreateOrderForm
-    success_url = reverse_lazy('register')
+    success_url = reverse_lazy('order:list')
 
     def form_valid(self, form):
         data = form.save(commit=False)
@@ -33,7 +33,7 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
 class DeleteOrderView(LoginRequiredMixin, DeleteView):
     model = Order
     template_name = 'orders/confirm_delete.html'  # Укажите шаблон для подтверждения удаления
-    success_url = reverse_lazy('order_list')  # URL для перенаправления после успешного удаления
+    success_url = reverse_lazy('order:list')  # URL для перенаправления после успешного удаления
 
     def get_queryset(self):
         """

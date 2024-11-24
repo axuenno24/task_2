@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('registration/', include('design.urls')),  # Подключаем urls из приложения design
     path('', RedirectView.as_view(url='/registration/')),
-    path('order/', include('orders.urls')),
+    path('order/', include('orders.urls', namespace="order")),
 ]
 
 if settings.DEBUG:

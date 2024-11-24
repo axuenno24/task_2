@@ -1,10 +1,11 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.views import generic, View
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 
 from .forms import LoginForm, RegisterUserForm
 
@@ -33,18 +34,16 @@ def logout_view(request):
     logout(request)  # Выход пользователя
     return render(request, 'registration/logout.html')
 
-# Профиль
-# def profile(request):
-#     # Получаем текущего пользователя
-#     user = request.user
-#
-#     if request.method == 'POST':
-#         form = CustomUserCreationForm(request.POST, instance=user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect(
-#                 reverse_lazy('registration:profile'))  # Перенаправление на профиль после успешного сохранения
-#     else:
-#         form = CustomUserCreationForm(instance=user)  # Инициализация формы с данными пользователя
-#
-#     return render(request, 'catalog/profile.html', {'form': form})
+
+class ProfileUser(LoginRequiredMixin, TemplateView):
+    model = get_user_model()
+    template_name = 'registration/profile.html'
+    extra_context = {
+        'title': "Профиль пользователя",
+    }
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user

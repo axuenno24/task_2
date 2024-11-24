@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form method="post" enctype="multipart/form-data">
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="content">
+    <form method="post" class="form-container" enctype="multipart/form-data">
+    <h3>Регистрация</h3>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit Order</button>
+        <button class="" type="submit">Оформить заказ</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

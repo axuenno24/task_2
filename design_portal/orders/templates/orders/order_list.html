@@ -1,13 +1,17 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-  <h2>Ваши заказы</h2>
-  <ul>
+  <div class="orders-container">
+    <h2>Ваши заказы</h2>
     {% for order in orders %}
-      <li>
-        {{ order.name }} - 
-        <a href="{% url 'order_delete' order.pk %}">Удалить</a>
-      </li>
+      <div class="order-item">
+        <img src="{{ order.photo.url }}" alt="Фото заявки" style="max-width: 200px;"><br>
+        <span>Название заказа: {{ order.title }}</span><br>
+        <span>Описание заказа: {{ order.description }}</span><br>
+        <span>Статус заказа: {{ order.status  }}</span><br>
+        <span>Время создания: {{ order.time_create }}</span><br>
+        <a href="{% url 'order:delete' order.pk %}">Удалить</a>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
