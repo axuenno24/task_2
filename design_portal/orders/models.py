@@ -3,10 +3,10 @@ from django.db import models
 
 
 class Order(models.Model):
-    class ChoicesStatus(models.Choices):
-        NEW = 'Новая'
-        ACCEPT = 'Принято'
-        DONE = 'Выполнено'
+    class ChoicesStatus(models.TextChoices):
+        NEW = 'Новая', "NEW"
+        ACCEPT = 'Принято', 'ACCEPT'
+        DONE = 'Выполнено', 'DONE'
 
     title = models.CharField(max_length=100)
     description = models.TextField()
